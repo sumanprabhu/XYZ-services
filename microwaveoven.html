@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Microwave Oven Issues</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Microwave Oven Issues</h1>
+
+  <p>Please select the problem you're facing:</p>
+
+  <form action="final.html" method="get">
+    <label for="problem-select">Choose a problem:</label>
+    <select id="problem-select" name="problem">
+      <option value="Not heating">Not heating</option>
+      <option value="Sparking inside">Sparking inside</option>
+      <option value="Turntable not rotating">Turntable not rotating</option>
+    </select>
+
+    <br><br>
+
+    <label for="custom-problem">Describe your problem here:</label><br>
+    <textarea id="custom-problem" name="customProblem" rows="4" cols="50" placeholder="Describe your issue..."></textarea>
+
+    <br><br>
+
+    <button type="submit">Submit Complaint</button>
+  </form>
+</body>
+</html>

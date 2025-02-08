@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Water Purifier Issues</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Water Purifier Issues</h1>
+  
+  <p>Please select the problem you're facing:</p>
+  
+  <form action="final.html" method="get">
+    <!-- Problem Dropdown -->
+    <label for="problem-select">Choose a problem:</label>
+    <select id="problem-select" name="problem">
+      <option value="Water is not filtering properly">Water is not filtering properly</option>
+      <option value="Water tastes bad">Water tastes bad</option>
+      <option value="Purifier is leaking">Purifier is leaking</option>
+    </select>
+    
+    <br><br>
+    
+    <!-- Custom Problem Text Area -->
+    <label for="custom-problem">Describe your problem here:</label><br>
+    <textarea id="custom-problem" name="customProblem" rows="4" cols="50" placeholder="Describe your issue..."></textarea>
+    
+    <br><br>
+
+    <!-- Submit Button -->
+    <button type="submit">Submit Complaint</button>
+  </form>
+</body>
+</html>
