@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Information</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: black;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-right: 15px;
+      font-weight: bold;
+    }
+    .title {
+      margin: 0 auto;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    main {
+      padding: 20px;
+      min-height: 70vh;
+      text-align: center;
+    }
+    footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+    </nav>
+    <div class="title">XYZ Services</div>
+  </header>
+
+  <main>
+    <h1>Enter Your Information</h1>
+    <form action="success.html" method="GET">
+      <input type="hidden" name="problem" value="<?= htmlspecialchars($_GET['problem'] ?? ''); ?>">
+
+      <label for="name">Name (Required):</label>
+      <input type="text" id="name" name="name" required><br><br>
+
+      <label for="contact">Contact Number (+91 Required):</label>
+      <input type="text" id="contact" name="contact" pattern="\+91\d{10}" placeholder="+91XXXXXXXXXX" required><br><br>
+
+      <label for="secondary_contact">Secondary Contact (Optional):</label>
+      <input type="text" id="secondary_contact" name="secondary_contact" placeholder="+91XXXXXXXXXX"><br><br>
+
+      <label>Problem:</label>
+      <script>
+        const params = new URLSearchParams(window.location.search);
+        const problem = params.get("problem");
+        if (problem) {
+          document.querySelector('input[name="problem"]').value = problem;
+        }
+      </script>
+
+      <label for="date">Preferred Date:</label>
+      <input type="date" id="date" name="date" required><br><br>
+
+      <label for="time">Preferred Time Slot:</label>
+      <select id="time" name="time" required>
+        <option value="9 AM - 12 PM">9 AM - 12 PM</option>
+        <option value="1 PM - 4 PM">1 PM - 4 PM</option>
+        <option value="5 PM - 8 PM">5 PM - 8 PM</option>
+      </select><br><br>
+
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 All Rights Reserved.</p>
+  </footer>
+</body>
+</html>

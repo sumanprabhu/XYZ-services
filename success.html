@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Success</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f9f9f9;
+    }
+    .container {
+      text-align: center;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      max-width: 500px;
+    }
+    h1 {
+      color: black;
+    }
+    p {
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Booking Confirmed!</h1>
+    <div id="success-message"></div>
+  </div>
+
+  <script>
+    // Get the query parameters from the URL
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name");
+    const contact = params.get("contact");
+    const secondaryContact = params.get("secondary_contact") || "Not Provided";
+    const problem = params.get("problem");
+    const date = params.get("date");
+    const time = params.get("time");
+
+    // Display the booking details
+    document.getElementById("success-message").innerHTML = `
+      <p>Thank you for your service request.</p>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Contact Number:</strong> ${contact}</p>
+      <p><strong>Secondary Contact:</strong> ${secondaryContact}</p>
+      <p><strong>Problem:</strong> ${problem}</p>
+      <p><strong>Preferred Date:</strong> ${date}</p>
+      <p><strong>Time Slot:</strong> ${time}</p>
+      <p>Your service request has been successfully registered!</p>
+    `;
+  </script>
+</body>
+</html>
