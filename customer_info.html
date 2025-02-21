@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Information</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: black;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-right: 15px;
+      font-weight: bold;
+    }
+    .title {
+      margin: 0 auto;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    main {
+      padding: 20px;
+      min-height: 70vh;
+      text-align: center;
+    }
+    footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+    </nav>
+    <div class="title">XYZ Services</div>
+  </header>
+
+  <main>
+    <h1>Enter Your Information</h1>
+    <form id="bookingForm">
+      <input type="hidden" id="problem" name="problem">
+
+      <label for="name">Name (Required):</label>
+      <input type="text" id="name" name="name" required><br><br>
+
+      <label for="contact">Contact Number (+91 Required):</label>
+      <input type="text" id="contact" name="contact" pattern="\+91\d{10}" placeholder="+91XXXXXXXXXX" required><br><br>
+
+      <label for="secondary_contact">Secondary Contact (Optional):</label>
+      <input type="text" id="secondary_contact" name="secondary_contact" placeholder="+91XXXXXXXXXX"><br><br>
+
+      <label>Issue selected by the Customer:</label>
+      <p id="problemText"></p> 
+
+      <label for="date">Preferred Date:</label>
+      <input type="date" id="date" name="date" required><br><br>
+
+      <label for="time">Preferred Time Slot:</label>
+      <select id="time" name="time" required>
+        <option value="9 AM - 12 PM">9 AM - 12 PM</option>
+        <option value="1 PM - 4 PM">1 PM - 4 PM</option>
+        <option value="5 PM - 8 PM">5 PM - 8 PM</option>
+      </select><br><br>
+
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const params = new URLSearchParams(window.location.search);
+      let problem = params.get("problem");
+
+      if (problem) {
+        document.getElementById("problem").value = problem;
+        document.getElementById("problemText").innerText = problem;
+      } else {
+        document.getElementById("problemText").innerText = "No problem selected.";
+      }
+    });
+
+    document.getElementById("bookingForm").addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const customerName = document.getElementById("name").value;
+      const contactNumber = document.getElementById("contact").value;
+      const secondaryContact = document.getElementById("secondary_contact").value || "Not Provided";
+      const problemDescription = document.getElementById("problem").value;
+      const serviceDate = document.getElementById("date").value;
+      const timeInterval = document.getElementById("time").value;
+
+      const bookingData = {
+        customer_name: customerName,
+        contact_number: contactNumber,
+        secondary_contact: secondaryContact,
+        problem_description: problemDescription,
+        service_date: serviceDate,
+        time_interval: timeInterval
+      };
+
+      try {
+        const response = await fetch("http://localhost:3000/api/bookings", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(bookingData)
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          localStorage.setItem("latestBooking", JSON.stringify(bookingData)); // Store data locally
+          alert("Booking successful!");
+          window.location.href = "success.html";
+        } else {
+          alert("Booking failed! Please try again.");
+          console.error(result);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Something went wrong! Please check your internet connection and try again.");
+      }
+    });
+  </script>
+</body>
+</html>

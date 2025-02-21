@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Confirmation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      background-color: #f8f8f8;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      margin: auto;
+    }
+    h1 {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Booking Confirmed!</h1>
+    <p>Thank you for your service request.</p>
+
+    <p><strong>Name:</strong> <span id="name"></span></p>
+    <p><strong>Contact Number:</strong> <span id="contact"></span></p>
+    <p><strong>Secondary Contact:</strong> <span id="secondary_contact"></span></p>
+    <p><strong>Problem:</strong> <span id="problem"></span></p>
+    <p><strong>Preferred Date:</strong> <span id="date"></span></p>
+    <p><strong>Time Slot:</strong> <span id="time"></span></p>
+
+    <p>Your service request has been successfully registered!</p>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const latestBooking = JSON.parse(localStorage.getItem("latestBooking"));
+
+      if (latestBooking) {
+        document.getElementById("name").innerText = latestBooking.customer_name;
+        document.getElementById("contact").innerText = latestBooking.contact_number;
+        document.getElementById("secondary_contact").innerText = latestBooking.secondary_contact;
+        document.getElementById("problem").innerText = latestBooking.problem_description;
+        document.getElementById("date").innerText = latestBooking.service_date;
+        document.getElementById("time").innerText = latestBooking.time_interval;
+      } else {
+        document.querySelector(".container").innerHTML = "<h1>No Booking Data Found!</h1>";
+      }
+    });
+  </script>
+
+</body>
+</html>
